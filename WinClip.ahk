@@ -193,7 +193,7 @@ class WinClip extends WinClip_base
     
     _loadFile( filePath, &Data )
     {
-        f := FileOpen( filePath, "r","CP0" )
+        f := FileOpen( filePath, "r","UTF-8" )
         if !IsObject( f )
             return 0
         f.Pos := 0
@@ -205,7 +205,7 @@ class WinClip extends WinClip_base
 
     _saveFile( filepath, &data, size )
     {
-        f := FileOpen( filepath, "w","CP0" )
+        f := FileOpen( filepath, "w","UTF-8" )
         bytes := f.RawWrite( data, size )
         f.close()
         return bytes
@@ -501,7 +501,7 @@ class WinClip extends WinClip_base
             return ""
         if !( out_size := this._getFormatData( &out_data, &clipData, clipSize, "Rich Text Format" ) )
             return ""
-        return strget( &out_data, out_size, "CP0" )
+        return strget( &out_data, out_size, "UTF-8" )
     }
     
     iGetRTF()
@@ -511,7 +511,7 @@ class WinClip extends WinClip_base
             return ""
         if !( out_size := this._getFormatData( &out_data, &clipData, clipSize, "Rich Text Format" ) )
             return ""
-        return strget( &out_data, out_size, "CP0" )
+        return strget( &out_data, out_size, "UTF-8" )
     }
     
     SetRTF( textData )
@@ -542,7 +542,7 @@ class WinClip extends WinClip_base
         objFormats[ uFmt ] := {}
         sLen := StrLen( textData )
         objFormats[ uFmt ].buffer := Buffer( sLen )
-        StrPut( textData, objFormats[ uFmt ].buffer.ptr, sLen, "CP0" )
+        StrPut( textData, objFormats[ uFmt ].buffer.ptr, sLen, "UTF-8" )
         objFormats[ uFmt ].size := sLen
         return this._compileClipData( &clipData, objFormats )
     }
@@ -655,7 +655,7 @@ class WinClip extends WinClip_base
         list := ""
         while numget( pFiles + 0, 0, fWide ? "UShort" : "UChar" )
         {
-            lastPath := strget( pFiles+0, fWide ? "UTF-16" : "CP0" )
+            lastPath := strget( pFiles+0, fWide ? "UTF-16" : "UTF-8" )
             list .= ( list ? "`n" : "" ) lastPath
             pFiles += ( StrLen( lastPath ) + 1 ) * ( fWide ? 2 : 1 )
         }
@@ -958,7 +958,7 @@ _BITMAPtoDIB_cleanup:
             return ""
         if !( out_size := this._getFormatData( &out_data, &clipData, clipSize, "HTML Format" ) )
             return ""
-        return strget( out_data, out_size, "CP0" )
+        return strget( out_data, out_size, "UTF-8" )
     }
     
     iGetHtml()
@@ -968,7 +968,7 @@ _BITMAPtoDIB_cleanup:
             return ""
         if !( out_size := this._getFormatData( &out_data, &clipData, clipSize, "HTML Format" ) )
             return ""
-        return strget( out_data, out_size, "CP0" )
+        return strget( out_data, out_size, "UTF-8" )
     }
     
     _getFormatName( iformat )
