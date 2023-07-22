@@ -8,6 +8,7 @@ If FileExist("clip.txt")
 
 wc := WinClip()
 
+
 msgbox "copy some text on clipboard"
 msgbox text := wc.GetText()
 

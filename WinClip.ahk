@@ -666,11 +666,12 @@ class WinClip extends WinClip_base
     {
         objFormats := this._parseClipboardData( &clipData, clipSize )
         uFmt := this.ClipboardFormats.CF_HDROP
+        prevList := ''
         if ( append && objFormats.has( uFmt ) )
             prevList := this._getFiles( objFormats[ uFmt ].buffer.ptr ) "`n"
         objFiles := WinClipAPI.StrSplit( prevList . files, "`n", A_Space A_Tab )
         objFiles := WinClipAPI.RemoveDubls( objFiles )
-        if !objFiles.MaxIndex()
+        if !objFiles.Length
             return 0
         objFormats[ uFmt ] := {}
         DROP_size := 20 + 2

@@ -79,7 +79,7 @@ class WinClipAPI extends WinClip_base
     }
     Static GetClipboardFormatName( iFormat ) {
         bufName := Buffer( 255*( this.m ), 0 )
-        DllCall( "GetClipboardFormatName", "Uint", iFormat, "str", bufName, "Uint", bufName.size )
+        DllCall( "GetClipboardFormatName", "Uint", iFormat, "UPtr", bufName.ptr, "Uint", bufName.size )
         return bufName
     }
     Static GetEnhMetaFileBits( hemf, &buf ) {
