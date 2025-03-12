@@ -1063,7 +1063,7 @@ _BITMAPtoDIB_cleanup:
         gdip_token := WinClipAPI.Gdip_Startup()
         if !WinClipAPI.GetEncoderClsid( format, &CLSID )
             return 0
-        DllCall("gdiplus\GdipCreateBitmapFromGdiDib", "Ptr", DIB.ptr, "Ptr", WinClipAPI.GetPixelInfo( DIB.ptr ), "Ptr*", &pBitmap:=0 )
+        DllCall("gdiplus\GdipCreateBitmapFromGdiDib", "Ptr", DIB.ptr, "Ptr", WinClipAPI.GetPixelInfo( &DIB ), "Ptr*", &pBitmap:=0 )
         DllCall("gdiplus\GdipSaveImageToFile", "Ptr", pBitmap, "wstr", filePath, "Ptr", CLSID.ptr, "Ptr", 0 )
         DllCall("gdiplus\GdipDisposeImage", "Ptr", pBitmap)
         WinClipAPI.Gdip_Shutdown( gdip_token )
